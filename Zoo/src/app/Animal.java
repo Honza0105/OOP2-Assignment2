@@ -1,13 +1,17 @@
+package app;
+
+import util.IFood;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 //
-// An Animal has one primary Caretaker. It should not be possible to just change the 
-// Caretaker from the outside; only if an object of class Caretaker adds an Animal
-// as a pet it is updated here. Only if a Caretaker removes a pet it is set to null
+// An app.Animal has one primary app.Caretaker. It should not be possible to just change the
+// app.Caretaker from the outside; only if an object of class app.Caretaker adds an app.Animal
+// as a pet it is updated here. Only if a app.Caretaker removes a pet it is set to null
 // here.
 //
-// While not planned it was envisioned Animal could have subclasses; feel free to add some
+// While not planned it was envisioned app.Animal could have subclasses; feel free to add some
 // if you need to do so
 //
 public class Animal implements Cloneable {
@@ -90,15 +94,15 @@ public class Animal implements Cloneable {
 
 	//
 	// Increase hungriness by 1
-	// If the hungriness reaches its maximum inform their Caretaker
+	// If the hungriness reaches its maximum inform their app.Caretaker
 	//
 	public void timePasses() {
 
 	}
 	
 	//
-	// If an Animal dies the Caretaker obviously should not try feeding him anymore
-	// Remove the Animal from his pets in this case
+	// If an app.Animal dies the app.Caretaker obviously should not try feeding him anymore
+	// Remove the app.Animal from his pets in this case
 	//
 	public void die() {
 		this.caretaker.removePet(this);

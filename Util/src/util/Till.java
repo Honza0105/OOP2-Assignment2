@@ -1,3 +1,5 @@
+package util;
+
 import java.math.BigDecimal;
 //
 // The zoo has one central till, there can be no second till

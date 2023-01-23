@@ -1,3 +1,5 @@
+package util;
+
 //
 // While food can be very complex, here we treat it as if it has no structure
 // and all animal can eat all foods. The only special thing about these foods

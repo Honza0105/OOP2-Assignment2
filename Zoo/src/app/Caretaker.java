@@ -1,16 +1,18 @@
+package app;
+
 import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 //
-// A Caretaker is a person who cleans Pens and feeds the animals
-// Each Caretaker knows what Animals to take care of
-// If an Animal in his care is being fed by someone else the Caretaker wants to know
-// If an Animal in his care reaches maximum hungriness he also wants to know
+// A app.Caretaker is a person who cleans Pens and feeds the animals
+// Each app.Caretaker knows what Animals to take care of
+// If an app.Animal in his care is being fed by someone else the app.Caretaker wants to know
+// If an app.Animal in his care reaches maximum hungriness he also wants to know
 //
-// Anytime a pet is added the Animal should update its Caretaker.
-// Anytime a pet is removed the Animal should set its Caretaker to null, unless the
-// Animal just died (then there is no caretaker anymore.)
+// Anytime a pet is added the app.Animal should update its app.Caretaker.
+// Anytime a pet is removed the app.Animal should set its app.Caretaker to null, unless the
+// app.Animal just died (then there is no caretaker anymore.)
 //
 public class Caretaker {
 	private final int id;
@@ -65,6 +67,6 @@ public class Caretaker {
 
 	@Override
 	public String toString() {
-		return "Caretaker [id=" + id + ", name=" + name + "]";
+		return "app.Caretaker [id=" + id + ", name=" + name + "]";
 	}
 }

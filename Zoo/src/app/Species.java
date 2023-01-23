@@ -1,3 +1,5 @@
+package app;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +13,17 @@ public class Species {
 	private String commonName;
 	private int maxHungriness;
 	private BigDecimal value;
-	private List<Gender> allowedGenders;
+	private List<Animal.Gender> allowedGenders;
 	private final Type type;
 	private int maxWeight;
 	
-	public Species(String commonName, int maxHungriness, int maxWeight, BigDecimal value, Type type, Gender... genders) {
+	public Species(String commonName, int maxHungriness, int maxWeight, BigDecimal value, Type type, Animal.Gender... genders) {
 		super();
 		this.commonName = commonName;
 		this.maxHungriness = maxHungriness;
 		this.value = value;
 		this.allowedGenders = new ArrayList<>();
-		for (Gender g: genders) {
+		for (Animal.Gender g: genders) {
 			this.allowedGenders.add(g);
 		}
 		this.type = type;
@@ -90,7 +92,7 @@ public class Species {
 		return commonName + " (" + type + ")";
 	}
 	
-	public Gender randomGender() {
+	public Animal.Gender randomGender() {
 		return allowedGenders.get(r.nextInt(allowedGenders.size()));
 	}
 	

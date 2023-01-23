@@ -1,11 +1,13 @@
+package app;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 //
-// A Pen is the place where the animals are being kept. A Pen is a kind of Zone, but one
-// with animals (whereas a Zone has Pens)
-// Only animals of one Species can be put in a Pen. For the sake of simplicity it is 
-// parameterized with an Animal (or subclass thereof); the species of that animal determines
+// A app.Pen is the place where the animals are being kept. A app.Pen is a kind of app.Zone, but one
+// with animals (whereas a app.Zone has Pens)
+// Only animals of one app.Species can be put in a app.Pen. For the sake of simplicity it is
+// parameterized with an app.Animal (or subclass thereof); the species of that animal determines
 // what can be put in the pen
 // Please note parts of this code are incorrect and need to be corrected for a good
 // implementation of the assignment

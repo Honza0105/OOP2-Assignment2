@@ -1,3 +1,5 @@
+package app;
+
 import static Animal.Gender.FEMALE;
 import static Animal.Gender.MALE;
 import static Species.Type.CREEPY;
@@ -11,7 +13,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 //
-//There can be only one SpeciesCollection ever!
+//There can be only one app.SpeciesCollection ever!
 //
 public class SpeciesCollection implements Set<Species>{
 	private Set<Species> species;
@@ -125,14 +127,14 @@ public class SpeciesCollection implements Set<Species>{
 	
 	//
 	// Feel free to add more species yourself here
-	// Feel free to create specific subclasses of Animal to make the
+	// Feel free to create specific subclasses of app.Animal to make the
 	// application more versatile
 	//
 	private void readSpeciesFromStorage() {
-		add(new Species("Tiger", 8, 550, new BigDecimal("15000"), SCARY, MALE, FEMALE));
-		add(new Species("Polar Bear", 777, 9, new BigDecimal("15000"),SCARY, MALE, FEMALE));
-		add(new Species("Panda", 18, 333, new BigDecimal("1500"),FLUFFY, MALE, FEMALE));
-		add(new Species("Tarantula", 1, 1, new BigDecimal("15"),CREEPY, MALE, FEMALE));
-		add(new Species("Cobra", 3, 2, new BigDecimal("22"),CREEPY, MALE, FEMALE));
+		add(new Species("Tiger", 8, 550, new BigDecimal("15000"), Species.Type.SCARY, Animal.Gender.MALE, Animal.Gender.FEMALE));
+		add(new Species("Polar Bear", 777, 9, new BigDecimal("15000"), Species.Type.SCARY, Animal.Gender.MALE, Animal.Gender.FEMALE));
+		add(new Species("Panda", 18, 333, new BigDecimal("1500"), Species.Type.FLUFFY, Animal.Gender.MALE, Animal.Gender.FEMALE));
+		add(new Species("Tarantula", 1, 1, new BigDecimal("15"), Species.Type.CREEPY, Animal.Gender.MALE, Animal.Gender.FEMALE));
+		add(new Species("Cobra", 3, 2, new BigDecimal("22"), Species.Type.CREEPY, Animal.Gender.MALE, Animal.Gender.FEMALE));
 	}
 }
