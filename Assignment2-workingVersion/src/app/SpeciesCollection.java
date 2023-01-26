@@ -170,6 +170,20 @@ public class SpeciesCollection implements Set<Species>{
 	// application more versatile
 	//
 	public boolean acquireAnimal(String commonName, int maxHungriness, int maxWeight, BigDecimal value, Species.Type type, Animal.Gender... genders) {
+		boolean isFree = (type == Species.Type.FLUFFY || type == Species.Type.COMMON);
+		if (!isFree && value.compareTo(BigDecimal.ZERO) <= 0 ) {
+			throw new IllegalArgumentException("Cost of animal should be greater than zero.");
+		}
+		if (!isFree && !Till.getInstance().withdraw(value)) {
+			System.out.println("Not enough funds to acquire " + commonName);
+			return false;
+		}
+		add(new Species(commonName, maxHungriness, maxWeight, value, type, genders));
+		System.out.println(commonName + " has been acquired!");
+		return true;
+	}
+
+	public boolean buyAnimal(String commonName, int maxHungriness, int maxWeight, BigDecimal value, Species.Type type, Animal.Gender... genders) {
 		if (value.compareTo(BigDecimal.ZERO) <= 0 ) {
 			throw new IllegalArgumentException("Cost of animal should be greater than zero.");
 		}
@@ -181,6 +195,13 @@ public class SpeciesCollection implements Set<Species>{
 		System.out.println(commonName+" has been acquired!");
 		return true;
 	}
+
+	public boolean adoptAnimal(String commonName, int maxHungriness, int maxWeight, BigDecimal value, Species.Type type, Animal.Gender... genders) {
+		add(new Species(commonName,maxHungriness,maxWeight,value,type, genders));
+		System.out.println(commonName+" has been acquired!");
+		return true;
+	}
+
 
 	private void readSpeciesFromStorage() {
 		add(new Species("Tiger", 8, 550, new BigDecimal("15000"), Species.Type.SCARY, Animal.Gender.MALE, Animal.Gender.FEMALE));

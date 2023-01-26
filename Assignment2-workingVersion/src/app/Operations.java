@@ -113,14 +113,14 @@ public class Operations {
 //			zoo.timePasses();
 //		}
 //		System.out.println(lionPen);
-		SpeciesCollection.getInstance().acquireAnimal("Crocodile",100,20,new BigDecimal("150"), Species.Type.CREEPY, Animal.Gender.MALE, Animal.Gender.FEMALE);
+		SpeciesCollection.getInstance().acquireAnimal("Crocodile",100,20,new BigDecimal("150"), Species.Type.FLUFFY, Animal.Gender.MALE, Animal.Gender.FEMALE);
 
 		till.deposit(new BigDecimal("1000"));
-		SpeciesCollection.getInstance().acquireAnimal("Crocodile",100,20,new BigDecimal("150"), Species.Type.CREEPY, Animal.Gender.MALE, Animal.Gender.FEMALE);
-//		for (Species species: SpeciesCollection.getInstance()
-//		) {
-//			System.out.println(species);
-//		}
+		SpeciesCollection.getInstance().acquireAnimal("Long living crocodile",500,20,new BigDecimal("150"), Species.Type.CREEPY, Animal.Gender.MALE, Animal.Gender.FEMALE);
+		for (Species species: SpeciesCollection.getInstance()
+		) {
+			System.out.println(species);
+		}
 
 
 
