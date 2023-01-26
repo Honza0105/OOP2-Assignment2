@@ -5,7 +5,9 @@ import animals.Lion;
 import animals.Tiger;
 import food.Pie;
 import food.Steak;
+import util.Till;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Operations {
@@ -15,6 +17,8 @@ public class Operations {
 	}
 	
 	public Operations() {
+		Till till = Till.getInstance(new BigDecimal("100"));
+
 
 		Zone<Animal> zoo = new Zone<>();
 
@@ -109,6 +113,17 @@ public class Operations {
 //			zoo.timePasses();
 //		}
 //		System.out.println(lionPen);
+		SpeciesCollection.getInstance().acquireAnimal("Crocodile",100,20,new BigDecimal("150"), Species.Type.CREEPY, Animal.Gender.MALE, Animal.Gender.FEMALE);
+
+		till.deposit(new BigDecimal("1000"));
+		SpeciesCollection.getInstance().acquireAnimal("Crocodile",100,20,new BigDecimal("150"), Species.Type.CREEPY, Animal.Gender.MALE, Animal.Gender.FEMALE);
+//		for (Species species: SpeciesCollection.getInstance()
+//		) {
+//			System.out.println(species);
+//		}
+
+
+
 
 
 

@@ -6,10 +6,26 @@ import java.math.BigDecimal;
 //
 public class Till {
 	private BigDecimal funds;
+	private static Till instance;
 
-	public Till(BigDecimal initialFunds) {
+	private Till(BigDecimal initialFunds) {
 		this.funds = initialFunds;
 	}
+
+	public static Till getInstance(BigDecimal initialFunds){
+		if(instance == null) {
+			instance = new Till(initialFunds);
+		}
+		return instance;
+	}
+	public static Till getInstance(){
+		BigDecimal initialFunds = BigDecimal.ZERO;
+		if(instance == null) {
+			instance = new Till(initialFunds);
+		}
+		return instance;
+	}
+
 	
 	public boolean withdraw(BigDecimal amount) {
 		if (amount.compareTo(BigDecimal.ZERO) < 0 ) {
