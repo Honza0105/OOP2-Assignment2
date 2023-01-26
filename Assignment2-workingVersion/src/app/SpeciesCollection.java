@@ -1,37 +1,108 @@
 package app;
 
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 //
 //There can be only one app.SpeciesCollection ever!
 //
 public class SpeciesCollection implements Set<Species>{
-	private Set<Species> species;
+	private Map<String, Species> species;
+	private static SpeciesCollection instance = new SpeciesCollection();
 	
-	public static SpeciesCollection instance() {
-		return null;
+	public static SpeciesCollection getInstance() {
+		return instance;
 	}
 	
-	public SpeciesCollection() {
-		this.species = new HashSet<>();
+	private SpeciesCollection() {
+		this.species = new HashMap<>();
 		readSpeciesFromStorage();
 	}
 	//
 	// The following implementation is inefficient. Improve this class so the looping is not necessary.
 	// As part of that you will need to implement a custom iterator using an inner class.
 	//
-	public Species get(String commonName) {
-		for (Species s: species) {
-			if (s.getCommonName().equals(commonName)) {
-				return s;
+	@Override
+	public Iterator<Species> iterator() {
+		return new SpeciesIterator(species.entrySet().iterator());
+	}
+
+	@Override
+	public Object[] toArray() {
+		return species.values().toArray();
+	}
+
+
+	@Override
+	public <T> T[] toArray(T[] a) {
+		return species.values().toArray(a);
+	}
+
+
+	@Override
+	public boolean add(Species species) {
+		return this.species.put(species.getCommonName(),species) == null;
+	}
+
+	@Override
+	public boolean remove(Object o) {
+		if (o instanceof Species) {
+			return this.species.remove(((Species) o).getCommonName()) != null;
+		} else if (o instanceof String) {
+			return this.species.remove(o) != null;
+		} else {
+			return false;
+		}
+	}
+
+
+	@Override
+	public boolean containsAll(Collection<?> c) {
+		for (Object o : c) {
+			if (!contains(o)) {
+				return false;
 			}
 		}
-		return null;
+		return true;
 	}
+
+
+	@Override
+	public boolean addAll(Collection<? extends Species> c) {
+		boolean result = false;
+		for (Species s : c) {
+			if (add(s)) {
+				result = true;
+			}
+		}
+		return result;
+	}
+
+
+	private class SpeciesIterator implements Iterator<Species> {
+		private Iterator<Map.Entry<String,Species>> iterator;
+
+		public SpeciesIterator(Iterator<Map.Entry<String, Species>> iterator) {
+			this.iterator = iterator;
+		}
+
+
+		@Override
+		public boolean hasNext() {
+			return iterator.hasNext();
+		}
+
+		@Override
+		public Species next() {
+			return iterator.next().getValue();
+		}
+	}
+
+
+	public Species get(String commonName) {
+		return species.get(commonName);
+	}
+
 
 	@Override
 	public int size() {
@@ -45,49 +116,17 @@ public class SpeciesCollection implements Set<Species>{
 
 	@Override
 	public boolean contains(Object o) {
-		return species.contains(o);
-	}
-
-	@Override
-	public Iterator<Species> iterator() {
-		return species.iterator();
-	}
-
-	@Override
-	public Object[] toArray() {
-		return species.toArray();
-	}
-
-	@Override
-	public <T> T[] toArray(T[] a) {
-		return species.toArray(a);
-	}
-
-	@Override
-	public boolean add(Species e) {
-		return species.add(e);
-	}
-
-	@Override
-	public boolean remove(Object o) {
-		return species.remove(o);
-	}
-
-	@Override
-	public boolean containsAll(Collection<?> c) {
-		return species.containsAll(c);
-	}
-
-	@Override
-	public boolean addAll(Collection<? extends Species> c) {
-		boolean result = false;
-		for (Object o: c) {
-			if (species.add((Species) o)) {
-				result = true;
-			}
+		if (o instanceof Species) {
+			return species.containsKey(((Species) o).getCommonName());
+		} else if (o instanceof String) {
+			return species.containsKey(o);
+		} else {
+			return false;
 		}
-		return result;
 	}
+
+
+
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
@@ -106,13 +145,17 @@ public class SpeciesCollection implements Set<Species>{
 	@Override
 	public boolean removeAll(Collection<?> c) {
 		boolean result = false;
-		for (Object o: c) {
-			if (species.remove((Species) o)) {
+		for (Object o : c) {
+			if (remove(o)) {
 				result = true;
 			}
 		}
 		return result;
 	}
+
+
+
+
 
 	@Override
 	public void clear() {
@@ -130,5 +173,6 @@ public class SpeciesCollection implements Set<Species>{
 		add(new Species("Panda", 18, 333, new BigDecimal("1500"), Species.Type.FLUFFY, Animal.Gender.MALE, Animal.Gender.FEMALE));
 		add(new Species("Tarantula", 1, 1, new BigDecimal("15"), Species.Type.CREEPY, Animal.Gender.MALE, Animal.Gender.FEMALE));
 		add(new Species("Cobra", 3, 2, new BigDecimal("22"), Species.Type.CREEPY, Animal.Gender.MALE, Animal.Gender.FEMALE));
+		add(new Species("Lion", 500, 300, new BigDecimal("20000"), Species.Type.SCARY, Animal.Gender.MALE, Animal.Gender.FEMALE));
 	}
 }

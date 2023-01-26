@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-public class Species {
+public class  Species {
 	private static final Random r = new Random();
 	private String commonName;
 	private int maxHungriness;

@@ -26,8 +26,16 @@ public class Pen<T extends Animal> {
 			return this.inhabitants.add(animal);
 		}
 		else {
-			return false;
+ 			return false;
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Pen{" +
+				"maxAnimals=" + maxAnimals +
+				", inhabitants=" + inhabitants +
+				'}';
 	}
 
 	public boolean removeAnimal(T animal) {
@@ -35,7 +43,7 @@ public class Pen<T extends Animal> {
 	}
 
 	public boolean isFull() {
-		return (this.inhabitants.size() < maxAnimals);
+		return (this.inhabitants.size() > maxAnimals);
 	}
 
 	public boolean isPresent(T animal) {
@@ -71,6 +79,13 @@ public class Pen<T extends Animal> {
 	// Return an empty pen
 	// Might need some adaptation
 	//
+
+	public void timePasses(){
+		for (Animal animal: inhabitants
+			 ) {
+			animal.timePasses();
+		}
+	}
 	public Pen<T> getEmptyPen() {
 		if (inhabitants.isEmpty()) {
 			return this;
@@ -78,5 +93,13 @@ public class Pen<T extends Animal> {
 		else {
 			return null;
 		}
+	}
+
+	public Set<T> getInhabitants() {
+		return inhabitants;
+	}
+
+	public Species getSpecies() {
+		return inhabitants.iterator().next().getSpecies();
 	}
 }

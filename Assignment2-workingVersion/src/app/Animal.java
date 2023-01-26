@@ -105,7 +105,7 @@ public class Animal implements Cloneable, ISubject {
 		else {
 			hungriness++;
 			if (hungriness== species.getMaxHungriness()) {
-				notifyMainObserver(Notification.RAVINGLY_HUNGRY);
+				notifyObservers(Notification.RAVINGLY_HUNGRY);
 			}
 		}
 	}
@@ -136,12 +136,16 @@ public class Animal implements Cloneable, ISubject {
 		return Objects.equals(dateOfBirth, other.dateOfBirth) && Objects.equals(name, other.name)
 				&& Objects.equals(species, other.species);
 	}
-	
+
 	@Override
 	public String toString() {
-		return name + " (" + species + ")";
+		return "Animal{" +
+				"species=" + species +
+				", name='" + name + '\'' +
+				", hungriness=" + hungriness +
+				'}';
 	}
-	
+
 	//
 	// Whenever an animal is being fed, the code needs to check whether it was fed by
 	// its caretaker or someone else.
