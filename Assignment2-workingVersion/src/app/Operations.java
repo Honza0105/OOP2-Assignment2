@@ -5,18 +5,23 @@ import animals.Lion;
 import animals.Tiger;
 import food.Pie;
 import food.Steak;
+import util.CustomClassLoader;
 import util.Till;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class Operations {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		new Operations();
 	}
 	
-	public Operations() {
+	public Operations() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 		Till till = Till.getInstance(new BigDecimal("100"));
 
 
@@ -117,11 +122,54 @@ public class Operations {
 
 		till.deposit(new BigDecimal("1000"));
 		SpeciesCollection.getInstance().acquireAnimal("Long living crocodile",500,20,new BigDecimal("150"), Species.Type.CREEPY, Animal.Gender.MALE, Animal.Gender.FEMALE);
+
 		for (Species species: SpeciesCollection.getInstance()
 		) {
 			System.out.println(species);
 		}
 
+//		CustomClassLoader ccl = new CustomClassLoader();
+//		ccl.findClass("/Users/janjelinek/temp/Crocodile");
+//		CustomClassLoader customClassLoader = new CustomClassLoader();
+//		try {
+//			Object obj;
+//			obj = customClassLoader.findClass("/Users/janjelinek/temp/Crocodile").newInstance();
+//			Method[] methods = obj.getClass().getDeclaredMethods();
+//			System.out.println(String.format("Methods of %s class:",obj.getClass().getName()));
+//			for(Method method : methods) {
+//				System.out.println(method.getName());
+//			}
+//		} catch (ClassFormatError e) {
+//			e.printStackTrace();
+//		} catch (IllegalAccessException e) {
+//			e.printStackTrace();
+//		} catch (InstantiationException e) {
+//			e.printStackTrace();
+//		}
+
+
+
+
+//		ccl.findClass("/Users/janjelinek/Library/CloudStorage/OneDrive-HogeschoolInholland/Inholland/AM2/Term 2/OOP2/Assignment 2/Assignment2-plugin/out/production/Assignment2-plugin/animals/Crocodile");
+
+		CustomClassLoader ccl = new CustomClassLoader();
+
+		//do I need hippo? bcs I do the cloning stuff actually
+		Class<? extends Animal> HippoClass = (Class<? extends Animal>) ccl.findClass("/Users/janjelinek/Library/CloudStorage/OneDrive-HogeschoolInholland/Inholland/AM2/Term 2/OOP2/Assignment 2/Assignment2-plugin/out/production/Assignment2-plugin/animals/Hippo","animals.Hippo");
+		Class<?> speciesCollectionClass = ccl.findClass("/Users/janjelinek/Library/CloudStorage/OneDrive-HogeschoolInholland/Inholland/AM2/Term 2/OOP2/Assignment 2/Assignment2-plugin/out/production/Assignment2-plugin/app/SpeciesCollection","app.SpeciesCollection");
+		int i = 0;
+		for (Method method: speciesCollectionClass.getDeclaredMethods()
+			 ) {
+			System.out.print(i);
+			System.out.println(method);
+			i++;
+		}
+		Constructor<? extends Animal> hippoConstructor = HippoClass.getConstructor(Caretaker.class, String.class, LocalDate.class, Animal.Gender.class, int.class);
+		Animal hippo = hippoConstructor.newInstance(John,"Hippo",LocalDate.of(2021,2,2),Animal.Gender.MALE,2);
+		System.out.println(hippo);
+//		Method acquireAnimal = speciesCollectionClass.getDeclaredMethod("acquireAnimal", (Class<?>) Hippo.newInstance());
+//		acquireAnimal.invoke(SpeciesCollection.getInstance(),Hippo);
+//		System.out.println(Arrays.toString(speciesCollectionClass.getDeclaredMethods()));
 
 
 

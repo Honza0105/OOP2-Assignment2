@@ -2,7 +2,6 @@ package animals;
 
 import app.Animal;
 import app.Caretaker;
-import app.Species;
 import app.SpeciesCollection;
 
 import java.time.LocalDate;
