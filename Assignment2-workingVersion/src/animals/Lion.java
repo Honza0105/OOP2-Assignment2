@@ -7,6 +7,9 @@ import app.SpeciesCollection;
 
 import java.time.LocalDate;
 
+/**
+ * Example subclass of Animal.
+ */
 public class Lion extends Animal {
 
     public Lion(Caretaker caretaker, String name, LocalDate dateOfBirth, Gender gender, int weight) {

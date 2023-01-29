@@ -7,15 +7,9 @@ import util.Notification;
 import java.time.LocalDate;
 import java.util.Objects;
 
-//
-// An app.Animal has one primary app.Caretaker. It should not be possible to just change the
-// app.Caretaker from the outside; only if an object of class app.Caretaker adds an app.Animal
-// as a pet it is updated here. Only if a app.Caretaker removes a pet it is set to null
-// here.
-//
-// While not planned it was envisioned app.Animal could have subclasses; feel free to add some
-// if you need to do so
-//
+/**
+ * Animal class represents all animals.
+ */
 public class Animal implements Cloneable, ISubject {
 	private Species species;
 	private String name;
@@ -94,10 +88,10 @@ public class Animal implements Cloneable, ISubject {
 		return hungriness;
 	}
 
-	//
-	// Increase hungriness by 1
-	// If the hungriness reaches its maximum inform their app.Caretaker
-	//!seems to be done
+	/**
+	 * Increases hungriness by 1
+	 * If hungriness reaches its maximum, animal informs its Caretaker.
+	 */
 	public void timePasses() {
 		if (hungriness== species.getMaxHungriness()){
 				notifyObservers(Notification.RAVINGLY_HUNGRY);
@@ -109,11 +103,11 @@ public class Animal implements Cloneable, ISubject {
 			}
 		}
 	}
-	
-	//
-	// If an app.Animal dies the app.Caretaker obviously should not try feeding him anymore
-	// Remove the app.Animal from his pets in this case
-	//!seems to be done
+
+
+	/**
+	 * If animal dies, main Caretaker is informed and animal is removed from his pet.
+	 */
 	public void die() {
 		notifyMainObserver(Notification.DIED);
 		this.caretaker.removePet(this);
@@ -143,13 +137,12 @@ public class Animal implements Cloneable, ISubject {
 
 	}
 
-	//
-	// Whenever an animal is being fed, the code needs to check whether it was fed by
-	// its caretaker or someone else.
-	// In case of the caretaker the animal eats and decreases its hungriness, but that's it
-	// In case of other people also inform all caretakers (all of them so they 
-	// can make the culprit stop!)
-	//
+
+	/**
+	 * Whenever an animal is being fed, it is checked whether it was fed by its Caretaker or someone else.
+	 * In case of another Caretaker, all Caretakers are informed.
+	 * Food decreases hungriness of the animal.
+	 */
 	public void feed(IFood food, Caretaker caretaker) {
 		if (!caretaker.equals(this.caretaker)){
 			notifyObservers(Notification.FED_BY_SOMEONE_ELSE);

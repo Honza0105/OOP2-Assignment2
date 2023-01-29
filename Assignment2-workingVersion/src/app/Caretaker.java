@@ -8,16 +8,10 @@ import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-//
-// A app.Caretaker is a person who cleans Pens and feeds the animals
-// Each app.Caretaker knows what Animals to take care of
-// If an app.Animal in his care is being fed by someone else the app.Caretaker wants to know
-// If an app.Animal in his care reaches maximum hungriness he also wants to know
-//
-// Anytime a pet is added the app.Animal should update its app.Caretaker.
-// Anytime a pet is removed the app.Animal should set its app.Caretaker to null, unless the
-// app.Animal just died (then there is no caretaker anymore.)
-//
+
+/**
+ * Caretakers are taking care of animals and are informed by them in specific situations.
+ */
 public class Caretaker implements IObserver {
 	private final int id;
 	private String name;

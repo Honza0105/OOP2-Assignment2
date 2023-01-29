@@ -1,9 +1,10 @@
 package util;
 
 import java.math.BigDecimal;
-//
-// The zoo has one central till, there can be no second till
-//
+
+/**
+ * Class describing a Till containing all the Money of zoo, in this case.
+ */
 public class Till {
 	private BigDecimal funds;
 	private static Till instance;

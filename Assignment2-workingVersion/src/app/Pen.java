@@ -3,15 +3,11 @@ package app;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-//
-// A app.Pen is the place where the animals are being kept. A app.Pen is a kind of app.Zone, but one
-// with animals (whereas a app.Zone has Pens)
-// Only animals of one app.Species can be put in a app.Pen. For the sake of simplicity it is
-// parameterized with an app.Animal (or subclass thereof); the species of that animal determines
-// what can be put in the pen
-// Please note parts of this code are incorrect and need to be corrected for a good
-// implementation of the assignment
-//
+
+/**
+ * A pen is the place where the animals are being kept.
+ * @param <T> Subclass of Animal
+ */
 public class Pen<T extends Animal> {
 	private int maxAnimals;
 	private Set<T> inhabitants;
@@ -62,11 +58,11 @@ public class Pen<T extends Animal> {
 	public boolean isEmpty() {
 		return inhabitants.isEmpty();
 	}
-	
-	//
-	// Return a pen where the species already is present and which has room left for another animal
-	// Might need some adaptation
-	//
+
+
+	/**
+	 * Returns a pen where the species already is present and which has room left for another animal.
+	 */
 	public Pen<T> getAvailablePen(Species species) {
 		if (isFull() ) {
 			return null;
@@ -84,10 +80,6 @@ public class Pen<T extends Animal> {
 			return null;
 		}
 	}
-	//
-	// Return an empty pen
-	// Might need some adaptation
-	//
 
 	public void timePasses(){
 		for (Animal animal: inhabitants
@@ -95,6 +87,10 @@ public class Pen<T extends Animal> {
 			animal.timePasses();
 		}
 	}
+
+	/**
+	 * returns an empty pen.
+	 */
 	public Pen<T> getEmptyPen() {
 		if (inhabitants.isEmpty()) {
 			return this;

@@ -1,11 +1,11 @@
 package app;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
+/**
+ * Species class contains all the necessary information about given species.
+ */
 public class  Species {
 	private static final Random r = new Random();
 	private String commonName;
@@ -21,9 +21,7 @@ public class  Species {
 		this.maxHungriness = maxHungriness;
 		this.value = value;
 		this.allowedGenders = new ArrayList<>();
-		for (Animal.Gender g: genders) {
-			this.allowedGenders.add(g);
-		}
+		this.allowedGenders.addAll(Arrays.asList(genders));
 		this.type = type;
 		this.maxWeight = maxWeight;
 	}
@@ -93,8 +91,11 @@ public class  Species {
 	public Animal.Gender randomGender() {
 		return allowedGenders.get(r.nextInt(allowedGenders.size()));
 	}
-	
-	
+
+
+	/**
+	 * This class describes types of animals.By default, Common and Fluffy are adopted, creepy and scary are bought.
+	 */
 	public enum Type { COMMON(0.2), CREEPY(0.1), SCARY(0.4), FLUFFY(0.3);
 		private double digestSpeed;
 		

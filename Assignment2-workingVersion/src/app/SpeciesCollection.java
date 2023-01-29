@@ -5,9 +5,9 @@ import util.Till;
 import java.math.BigDecimal;
 import java.util.*;
 
-//
-//There can be only one app.SpeciesCollection ever!
-//
+/**
+ * A singleton class containing a collection of all known species to the zoo.
+ */
 public class SpeciesCollection implements Set<Species>, ISpeciesCollection{
 	private Map<String, Species> species;
 	private static SpeciesCollection instance = new SpeciesCollection();
@@ -20,10 +20,7 @@ public class SpeciesCollection implements Set<Species>, ISpeciesCollection{
 		this.species = new HashMap<>();
 		readSpeciesFromStorage();
 	}
-	//
-	// The following implementation is inefficient. Improve this class so the looping is not necessary.
-	// As part of that you will need to implement a custom iterator using an inner class.
-	//
+
 	@Override
 	public Iterator<Species> iterator() {
 		return new SpeciesIterator(species.entrySet().iterator());
@@ -163,12 +160,10 @@ public class SpeciesCollection implements Set<Species>, ISpeciesCollection{
 	public void clear() {
 		species.clear();
 	}
-	
-	//
-	// Feel free to add more species yourself here
-	// Feel free to create specific subclasses of app.Animal to make the
-	// application more versatile
-	//
+
+	/**
+	 * This method adds a new spicies to the collection, if enough money is available.
+	 */
 	public boolean acquireAnimal(String commonName, int maxHungriness, int maxWeight, BigDecimal value, Species.Type type, Animal.Gender... genders) {
 		boolean isFree = (type == Species.Type.FLUFFY || type == Species.Type.COMMON);
 		if (!isFree && value.compareTo(BigDecimal.ZERO) <= 0 ) {

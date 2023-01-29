@@ -10,10 +10,11 @@ import java.util.Arrays;
 
 /**
  * Disclaimer: This is a modification of SOFTWARE developed by HARALD DRILLENBURG
+ * This class loads a class from the location given. It also requires the name of the class loaded.
  */
 public class CustomClassLoader extends ClassLoader {
 
-	@Override
+	@Override @Deprecated
 	public Class<?> findClass(String name) throws ClassNotFoundException {
 		byte[] b = loadClassFromFile(name);
 		System.out.println(determineClassName(b));
