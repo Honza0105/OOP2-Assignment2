@@ -158,7 +158,6 @@ public class Animal implements Cloneable, ISubject {
 
 	@Override
 	public void notifyObservers(Notification notification) {
-		//implement to inform all caretakers
 		for (Caretaker caretaker: Caretaker.getAllCaretakers()
 			 ) {
 			caretaker.update(this, notification);
