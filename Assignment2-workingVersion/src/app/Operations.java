@@ -174,14 +174,30 @@ public class Operations {
 		//because it sometimes had a problem recognizing class names.
 		CustomClassLoader ccl = new CustomClassLoader();
 
-		//do I need hippo? bcs I do the cloning stuff actually
-//		Class<? extends Animal> HippoClass = (Class<? extends Animal>) ccl.findClass("/Users/janjelinek/Library/CloudStorage/OneDrive-HogeschoolInholland/Inholland/AM2/Term 2/OOP2/Assignment 2/Assignment2-plugin/out/production/Assignment2-plugin/animals/Hippo","animals.Hippo");
-//
-//		Constructor<? extends Animal> hippoConstructor = HippoClass.getConstructor(Caretaker.class, String.class, LocalDate.class, Animal.Gender.class, int.class);
-//		Animal hippo = hippoConstructor.newInstance(John,"Hippo",LocalDate.of(2021,2,2),Animal.Gender.MALE,2);
-//		System.out.println(hippo);
+		//Importing hippo class
+		Class<? extends Animal> HippoClass = (Class<? extends Animal>) ccl.findClass("/Users/janjelinek/Library/CloudStorage/OneDrive-HogeschoolInholland/Inholland/AM2/Term 2/OOP2/Assignment 2/Assignment2-plugin/out/production/Assignment2-plugin/animals/Hippo","animals.Hippo");
+
+		Constructor<? extends Animal> hippoConstructor = HippoClass.getConstructor(Caretaker.class, String.class, LocalDate.class, Animal.Gender.class, int.class);
+		Animal hippo = hippoConstructor.newInstance(John,"Carl",LocalDate.of(2021,2,2),Animal.Gender.MALE,2);
 
 
+		//Hippo factory
+		AnimalFactory<Animal> hippoFactory = new AnimalFactory<>() {
+			@Override
+			public Animal createAnimal(Caretaker caretaker, String name, LocalDate dateOfBirth, Animal.Gender gender, int weight) {
+				return new Animal(caretaker,SpeciesCollection.getInstance().get("Hippo"), name, dateOfBirth, gender, weight);
+			}
+		};
+
+		//Creation of HippoPen. I can't generify hippoPen with Hippo.
+		//Theoretically I can add other animals, but if I do so, only species of that Animal can be added to given pen.
+		Pen<Animal> hippoPen= new Pen<>(5);
+		hippoPen.addAnimal(hippo);
+		System.out.println("Here is our pen with a Hippo included by a plugin!");
+		System.out.println(hippoPen);
+		System.out.println();
+
+		System.out.println("Last but not least we try cloning!");
 		System.out.println("Currently we have "+ Till.getInstance().getFunds()+ "€ left in till.");
 
 		//Importing the new method for acquiring Animals
@@ -191,10 +207,15 @@ public class Operations {
 		//Getting object of the plugged in speciesCollection
 		Object speciesCollectionInstance = speciesCollectionClass.getDeclaredConstructor().newInstance();
 		//Executing the new method.
-		acquireAnimal.invoke(speciesCollectionInstance, "Hippo", 300, 300, new BigDecimal("300"), Species.Type.CREEPY, new Animal.Gender[] {Animal.Gender.MALE});
+		acquireAnimal.invoke(speciesCollectionInstance, "Shark", 300, 300, new BigDecimal("300"), Species.Type.CREEPY, new Animal.Gender[] {Animal.Gender.MALE});
 
 		System.out.println("And now we have "+ Till.getInstance().getFunds()+ "€ left in till. Because cloning is only 20€!");
+
+		System.out.println("As we can see below. Shark has been added to our Species Collection." +
+				" And our plugged in Hippo is also there.");
 		System.out.println(Arrays.toString(SpeciesCollection.getInstance().toArray()));
+
+
 
 
 

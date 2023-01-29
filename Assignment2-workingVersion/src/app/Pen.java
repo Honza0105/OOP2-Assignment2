@@ -23,6 +23,15 @@ public class Pen<T extends Animal> {
 
 	public boolean addAnimal(T animal) {
 		if (!isFull()) {
+			for (Animal inhabitant: inhabitants
+				 ) {
+				if (inhabitant.getClass()==animal.getClass()){
+					return this.inhabitants.add(animal);
+				}
+				else {
+					return false;
+				}
+			}
 			return this.inhabitants.add(animal);
 		}
 		else {
