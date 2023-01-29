@@ -8,7 +8,7 @@ import java.util.*;
 //
 //There can be only one app.SpeciesCollection ever!
 //
-public class SpeciesCollection implements Set<Species>{
+public class SpeciesCollection implements Set<Species>, ISpeciesCollection{
 	private Map<String, Species> species;
 	private static SpeciesCollection instance = new SpeciesCollection();
 	

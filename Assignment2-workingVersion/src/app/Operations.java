@@ -156,20 +156,20 @@ public class Operations {
 
 		//do I need hippo? bcs I do the cloning stuff actually
 		Class<? extends Animal> HippoClass = (Class<? extends Animal>) ccl.findClass("/Users/janjelinek/Library/CloudStorage/OneDrive-HogeschoolInholland/Inholland/AM2/Term 2/OOP2/Assignment 2/Assignment2-plugin/out/production/Assignment2-plugin/animals/Hippo","animals.Hippo");
-		Class<?> speciesCollectionClass = ccl.findClass("/Users/janjelinek/Library/CloudStorage/OneDrive-HogeschoolInholland/Inholland/AM2/Term 2/OOP2/Assignment 2/Assignment2-plugin/out/production/Assignment2-plugin/app/SpeciesCollection","app.SpeciesCollection");
-		int i = 0;
-		for (Method method: speciesCollectionClass.getDeclaredMethods()
-			 ) {
-			System.out.print(i);
-			System.out.println(method);
-			i++;
-		}
+
 		Constructor<? extends Animal> hippoConstructor = HippoClass.getConstructor(Caretaker.class, String.class, LocalDate.class, Animal.Gender.class, int.class);
 		Animal hippo = hippoConstructor.newInstance(John,"Hippo",LocalDate.of(2021,2,2),Animal.Gender.MALE,2);
 		System.out.println(hippo);
-//		Method acquireAnimal = speciesCollectionClass.getDeclaredMethod("acquireAnimal", (Class<?>) Hippo.newInstance());
-//		acquireAnimal.invoke(SpeciesCollection.getInstance(),Hippo);
-//		System.out.println(Arrays.toString(speciesCollectionClass.getDeclaredMethods()));
+
+		Class<?> speciesCollectionClass = ccl.findClass("/Users/janjelinek/Library/CloudStorage/OneDrive-HogeschoolInholland/Inholland/AM2/Term 2/OOP2/Assignment 2/Assignment2-plugin/out/production/Assignment2-plugin/app/PluginSpeciesCollection","app.PluginSpeciesCollection");
+		for (Method method: speciesCollectionClass.getDeclaredMethods()
+			 ) {
+			System.out.println(method);
+		}
+		//now I have to add methods and then try to invoke it and test if it is added
+		Method acquireAnimal = speciesCollectionClass.getDeclaredMethod("acquireAnimal",String.class,int.class,int.class, BigDecimal.class, Species.Type.class, Animal.Gender.class);
+		acquireAnimal.invoke(speciesCollectionClass,"Hippo",300,300,new BigDecimal("300"), Species.Type.CREEPY, Animal.Gender.MALE);
+		System.out.println(Arrays.toString(speciesCollectionClass.getDeclaredMethods()));
 
 
 

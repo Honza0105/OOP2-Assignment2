@@ -8,15 +8,15 @@ import java.util.*;
 //
 //There can be only one app.SpeciesCollection ever!
 //
-public class SpeciesCollection implements Set<Species>, ISpeciesCollection{
+public class SpeciesCollection2_0 implements Set<Species>{
 	private Map<String, Species> species;
-	private static SpeciesCollection instance = new SpeciesCollection();
-	
-	public static SpeciesCollection getInstance() {
+	private static SpeciesCollection2_0 instance = new SpeciesCollection2_0();
+
+	public static SpeciesCollection2_0 getInstance() {
 		return instance;
 	}
-	
-	private SpeciesCollection() {
+
+	private SpeciesCollection2_0() {
 		this.species = new HashMap<>();
 		readSpeciesFromStorage();
 	}
@@ -169,18 +169,17 @@ public class SpeciesCollection implements Set<Species>, ISpeciesCollection{
 	// Feel free to create specific subclasses of app.Animal to make the
 	// application more versatile
 	//
-	public boolean acquireAnimal(String commonName, int maxHungriness, int maxWeight, BigDecimal value, Species.Type type, Animal.Gender... genders) {
-		boolean isFree = (type == Species.Type.FLUFFY || type == Species.Type.COMMON);
-		if (!isFree && value.compareTo(BigDecimal.ZERO) <= 0 ) {
+	public Animal acquireAnimal(Animal animal) {
+		BigDecimal value = new BigDecimal("20");
+		if (value.compareTo(BigDecimal.ZERO) <= 0 ) {
 			throw new IllegalArgumentException("Cost of animal should be greater than zero.");
 		}
-		if (!isFree && !Till.getInstance().withdraw(value)) {
-			System.out.println("Not enough funds to acquire " + commonName);
-			return false;
+		if (!Till.getInstance().withdraw(value)) {
+			System.out.println("Not enough funds to clone");
+			return null;
 		}
-		add(new Species(commonName, maxHungriness, maxWeight, value, type, genders));
-		System.out.println(commonName + " has been acquired!");
-		return true;
+		System.out.println(" has been cloned!");
+		return animal.clone();
 	}
 
 	public boolean buyAnimal(String commonName, int maxHungriness, int maxWeight, BigDecimal value, Species.Type type, Animal.Gender... genders) {
