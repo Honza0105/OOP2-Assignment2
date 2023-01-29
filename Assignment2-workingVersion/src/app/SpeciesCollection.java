@@ -183,6 +183,10 @@ public class SpeciesCollection implements Set<Species>, ISpeciesCollection{
 		return true;
 	}
 
+	public boolean acquireAnimal(Animal animal){
+		return acquireAnimal(animal.getSpecies().getCommonName(), animal.getSpecies().getMaxHungriness(),animal.getSpecies().getMaxWeight(),animal.getSpecies().getValue(),animal.getSpecies().getType(),animal.getGender());
+	}
+
 	public boolean buyAnimal(String commonName, int maxHungriness, int maxWeight, BigDecimal value, Species.Type type, Animal.Gender... genders) {
 		if (value.compareTo(BigDecimal.ZERO) <= 0 ) {
 			throw new IllegalArgumentException("Cost of animal should be greater than zero.");

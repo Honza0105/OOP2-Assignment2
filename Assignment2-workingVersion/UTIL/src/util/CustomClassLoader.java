@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
+/**
+ * Disclaimer: This is a modification of SOFTWARE developed by HARALD DRILLENBURG
+ */
 public class CustomClassLoader extends ClassLoader {
 
 	@Override

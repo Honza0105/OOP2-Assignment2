@@ -100,7 +100,7 @@ public class Animal implements Cloneable, ISubject {
 	//!seems to be done
 	public void timePasses() {
 		if (hungriness== species.getMaxHungriness()){
-				notifyMainObserver(Notification.RAVINGLY_HUNGRY);
+				notifyObservers(Notification.RAVINGLY_HUNGRY);
 		}
 		else {
 			hungriness++;
@@ -139,11 +139,8 @@ public class Animal implements Cloneable, ISubject {
 
 	@Override
 	public String toString() {
-		return "Animal{" +
-				"species=" + species +
-				", name='" + name + '\'' +
-				", hungriness=" + hungriness +
-				'}';
+		return name + " the " + species.getCommonName() + ", hungry of " + hungriness;
+
 	}
 
 	//

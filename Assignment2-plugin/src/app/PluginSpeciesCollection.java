@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public class PluginSpeciesCollection implements ISpeciesCollection{
     SpeciesCollection speciesCollection = SpeciesCollection.getInstance();
     @Override
-    public boolean acquireAnimal(String commonName, int maxHungriness, int maxWeight, BigDecimal value, Species.Type type, Animal.Gender gender) {
+    public boolean acquireAnimal(String commonName, int maxHungriness, int maxWeight, BigDecimal value, Species.Type type, Animal.Gender... genders) {
         value = new BigDecimal("20");
         if (value.compareTo(BigDecimal.ZERO) <= 0 ) {
             throw new IllegalArgumentException("Cost of animal should be greater than zero.");
@@ -16,8 +16,8 @@ public class PluginSpeciesCollection implements ISpeciesCollection{
             System.out.println("Not enough funds to clone");
             return false;
         }
-        System.out.println(" has been cloned!");
-        speciesCollection.add(new Species(commonName, maxHungriness, maxWeight, value, type, gender));
+        System.out.println(commonName+ " has been cloned!");
+        speciesCollection.add(new Species(commonName, maxHungriness, maxWeight, value, type, genders));
         return true;
     }
 

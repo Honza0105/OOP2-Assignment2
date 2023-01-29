@@ -86,6 +86,6 @@ public class Caretaker implements IObserver {
 
 	@Override
 	public void update(ISubject iSubject, Notification notification) {
-		System.out.println(name + " has been notified by " + iSubject + " because it is " + notification);
+		System.out.println(name + " has been notified by " + iSubject + ", because it is " + notification);
 	}
 }

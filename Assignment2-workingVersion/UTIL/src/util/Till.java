@@ -45,6 +45,7 @@ public class Till {
 			throw new IllegalArgumentException("You cannot deposit a negative amount in the till.");
 		}
 		funds = funds.add(amount);
+		System.out.println(amount + "€ has been been deposited!");
 	}
 	
 	public BigDecimal getFunds() {
